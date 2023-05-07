@@ -47,3 +47,6 @@ master-master - запись и выборку можно производить
 Выполните конфигурацию master-master репликации. Произведите проверку.
 
 *Приложите скриншоты конфигурации, выполнения работы: состояния и режимы работы серверов.*
+![image](https://user-images.githubusercontent.com/106932460/236699851-8143fb87-c161-41a0-9fae-dda86a7f0953.png)
+![image](https://user-images.githubusercontent.com/106932460/236699820-f6b695a4-9ae0-4aa0-8254-fcbea77c5740.png)
+
