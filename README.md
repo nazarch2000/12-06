@@ -30,6 +30,34 @@ master-master - запись и выборку можно производить
 ### Задание 2
 
 Выполните конфигурацию master-slave репликации, примером можно пользоваться из лекции.
+
+Настройка мастера
+```sql
+CREATE USER 'replication'@'%' IDENTIFIED BY 'password';
+GRANT REPLICATION SLAVE ON *.* TO 'replication'@'%';
+FLUSH PRIVILEGES;
+```
+```
+mysqldump sakila > sakila.sql
+# Скинул этот дамп на слейв сервер
+```
+```sql
+UNLOCK TABLES;
+```
+Настройка слейва
+```sql
+CREATE DATABASE `sakila`;
+```
+```
+mysql sakila < sakila.sql
+```
+```sql
+CHANGE MASTER TO MASTER_HOST='192.168.0.20',
+MASTER_USER='replication', MASTER_PASSWORD='password', MASTER_LOG_FILE='mysql-bin.000001', MASTER_LOG_POS=157;
+START SLAVE;
+```
+
+
 ![image](https://user-images.githubusercontent.com/106932460/236699002-e47c0ace-4a4f-4240-b53b-3409c8a7093d.png)
 ![image](https://user-images.githubusercontent.com/106932460/236698991-6fc583cb-f5f4-4df9-a895-b7c135c750b2.png)
 ![image](https://user-images.githubusercontent.com/106932460/236699016-46278919-679a-494d-b6d6-249b982a2b49.png)
