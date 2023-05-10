@@ -74,6 +74,25 @@ START SLAVE;
 
 Выполните конфигурацию master-master репликации. Произведите проверку.
 
+На первом мастере выполнил
+```sql
+slave stop;
+CHANGE MASTER TO MASTER_HOST = '192.168.0.10', MASTER_USER =
+'replicator', MASTER_PASSWORD = 'password', MASTER_LOG_FILE =
+'mysql-bin.000002', MASTER_LOG_POS = 408;
+slave start;
+```
+На втором мастере выполнил
+```sql
+CREATE USER 'replication'@'%' IDENTIFIED BY 'password';
+GRANT REPLICATION SLAVE ON *.* TO 'replication'@'%';
+FLUSH PRIVILEGES;
+slave stop;
+CHANGE MASTER TO MASTER_HOST = '192.168.0.20', MASTER_USER =
+'replicator', MASTER_PASSWORD = 'password', MASTER_LOG_FILE =
+'mysql-bin.000002', MASTER_LOG_POS = 1044;
+slave start;
+```
 *Приложите скриншоты конфигурации, выполнения работы: состояния и режимы работы серверов.*
 ![image](https://user-images.githubusercontent.com/106932460/236699851-8143fb87-c161-41a0-9fae-dda86a7f0953.png)
 ![image](https://user-images.githubusercontent.com/106932460/236699820-f6b695a4-9ae0-4aa0-8254-fcbea77c5740.png)
