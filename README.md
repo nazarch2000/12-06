@@ -78,7 +78,7 @@ START SLAVE;
 ```sql
 slave stop;
 CHANGE MASTER TO MASTER_HOST = '192.168.0.10', MASTER_USER =
-'replicator', MASTER_PASSWORD = 'password', MASTER_LOG_FILE =
+'replication', MASTER_PASSWORD = 'password', MASTER_LOG_FILE =
 'mysql-bin.000002', MASTER_LOG_POS = 408;
 slave start;
 ```
@@ -89,7 +89,7 @@ GRANT REPLICATION SLAVE ON *.* TO 'replication'@'%';
 FLUSH PRIVILEGES;
 slave stop;
 CHANGE MASTER TO MASTER_HOST = '192.168.0.20', MASTER_USER =
-'replicator', MASTER_PASSWORD = 'password', MASTER_LOG_FILE =
+'replication', MASTER_PASSWORD = 'password', MASTER_LOG_FILE =
 'mysql-bin.000002', MASTER_LOG_POS = 1044;
 slave start;
 ```
